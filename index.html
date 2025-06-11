@@ -1,0 +1,165 @@
+<!-- <!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>AngularJS Tutorial</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+    <script>
+        // Define AngularJS app and controller
+        angular.module('myApp', [])
+            .controller('MainController', function ($scope) {
+                $scope.name = "Aamir";
+                $scope.foo = 10;
+                $scope.bar = 20;
+
+                $scope.showDirective = true;
+                $scope.toggleDirective = function () {
+                    $scope.showDirective = !$scope.showDirective;
+                };
+
+                $scope.numbers = [2, 5, 8, 1, 4];
+                $scope.numbersReversed = [...$scope.numbers].reverse();
+                $scope.numbersSortedAsc = [...$scope.numbers].sort((a, b) => a - b);
+                $scope.numbersSortedDesc = [...$scope.numbers].sort((a, b) => b - a);
+
+                $scope.meats = ['Mutton', 'Beef', 'Fish', 'Chicken'];
+                $scope.meatsReversed = [...$scope.meats].reverse();
+                $scope.meatsSorted = [...$scope.meats].sort();
+            })
+
+            // Custom directive example
+            .directive('ninja', function () {
+                return {
+                    restrict: 'E',
+                    template: '<p>This is a custom directive called &lt;ninja&gt;.</p>'
+                };
+            });
+    </script>
+</head>
+
+<body ng-controller="MainController">
+
+    <h1>Welcome to AngularJS Tutorial</h1>
+    <p>This is a simple AngularJS application demonstrating various features.</p>
+
+    <h2>Two-way Data Binding Example</h2>
+    <label for="name">Enter your name:</label>
+    <input type="text" id="name" ng-model="name" placeholder="Enter your name" />
+    <p>Assalamu Alaikum, {{ name }}!</p>
+
+    <h2>Built-in and Custom Directives</h2>
+    <p>This is a built-in directive example: <code>ng-model</code></p>
+    <ninja></ninja>
+
+    <h2>ng-if Directive Example</h2>
+    <div>
+        <p ng-if="showDirective">This is conditionally shown using <code>ng-if</code>.</p>
+        <button ng-click="toggleDirective()">Toggle</button>
+    </div>
+
+    <h2>Expression Examples</h2>
+    <div>
+        <p>Numbers: {{ numbers }}</p>
+        <p>Sum: {{ numbers[0] + numbers[1] }}</p>
+        <p>Product: {{ numbers[0] * numbers[1] }}</p>
+        <p>First Number: {{ numbers[0] }}</p>
+        <p>Last Number: {{ numbers[numbers.length - 1] }}</p>
+        <p>Length: {{ numbers.length }}</p>
+        <p>Is First > Last? {{ numbers[0] > numbers[numbers.length - 1] }}</p>
+        <p>Reversed: {{ numbersReversed }}</p>
+        <p>Sorted Asc: {{ numbersSortedAsc }}</p>
+        <p>Sorted Desc: {{ numbersSortedDesc }}</p>
+    </div>
+
+    <h2>Meat List</h2>
+    <div>
+        <p>Meats: {{ meats }}</p>
+        <p>First Meat: {{ meats[0] }}</p>
+        <p>Last Meat: {{ meats[meats.length - 1] }}</p>
+        <p>Length: {{ meats.length }}</p>
+        <p>Is First Meat Beef? {{ meats[0] === 'Beef' }}</p>
+        <p>Reversed: {{ meatsReversed }}</p>
+        <p>Sorted: {{ meatsSorted }}</p>
+    </div>
+
+    <h2>More Expression Examples</h2>
+    <p>2 + 2 = {{ 2 + 2 }}</p>
+    <p>Length of Name: {{ name.length }}</p>
+    <p>Uppercase (JS): {{ name.toUpperCase() }}</p>
+    <p>Uppercase (Filter): {{ name | uppercase }}</p>
+    <p>Lowercase: {{ name | lowercase }}</p>
+    <p>JSON Format: {{ name | json }}</p>
+    <p>foo + bar = {{ foo + bar }}</p>
+    <p>{{ 'Hello, ' + name + '!' }}</p>
+    <p>foo * bar = {{ foo * bar }}</p>
+    <p>foo / bar = {{ foo / bar }}</p>
+    <p>foo - bar = {{ foo - bar }}</p>
+    <p>foo % bar = {{ foo % bar }}</p>
+    <p>foo > bar? {{ foo > bar }}</p>
+    <p>foo < bar? {{ foo < bar }}</p>
+    <p>foo >= bar? {{ foo >= bar }}</p>
+    <p>foo <= bar? {{ foo <= bar }}</p>
+    <p>foo === bar? {{ foo === bar }}</p>
+    <p>foo !== bar? {{ foo !== bar }}</p>
+    <p>foo && bar? {{ foo && bar }}</p>
+    <p>foo || bar? {{ foo || bar }}</p>
+    <p>foo ? bar : 0 = {{ foo ? bar : 0 }}</p>
+    <p>foo ? bar : 100 = {{ foo ? bar : 100 }}</p>
+    <p>foo ? bar : 'No' = {{ foo ? bar : 'No' }}</p>
+    <p>foo ? bar : 'Yes' = {{ foo ? bar : 'Yes' }}</p>
+    <p>foo ? bar : name = {{ foo ? bar : name }}</p>
+    <p>foo ? bar : 'Aamir' = {{ foo ? bar : 'Aamir' }}</p>
+    <p>foo ? bar : 'Aamir' + name = {{ foo ? bar : 'Aamir' + name }}</p>
+
+    <h1>Example: Filters.</h1>
+    <div>
+        <p>Original: {{ originalText }}</p>
+        <p>Uppercase: {{ originalText | uppercase }}</p>
+        <p>Lowercase: {{ originalText | lowercase }}</p>
+        <p>Currency: {{ price | currency }}</p>
+        <p>Date: {{ date | date:'mediumDate' }}</p>
+        <p>JSON: {{ jsonData | json }}</p>
+        <p>XML: {{ xmlData }}</p>
+        <p>CSV: {{ csvData }}</p>
+        <p>Text: {{ textData }}</p>
+        <p>Image URL: <img ng-src="{{ imageUrl }}" alt="Sample Image" width="300" height="200" /></p>
+        <p>Video URL: 
+            <video width="320" height="240" controls>
+                <source ng-src="{{ videoUrl }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </p>
+        <p>Audio URL: 
+            <audio controls>
+                <source ng-src="{{ audioUrl }}" type="audio/mpeg">
+                Your browser does not support the audio tag.
+            </audio>
+        </p>
+        <p>File Upload: <input type="file" file-model="myFile" /></p>
+        <button ng-click="uploadFile()">Upload File</button>
+        <p>Form Data:</p>
+        <form name="myForm" novalidate>
+            <label for="username">Username:</label>
+            <input type="text" id="username" ng-model="formData.username" required />
+            <span ng-show="myForm.username.$error.required && myForm.username.$touched">Username is required.</span>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" ng-model="formData.email" required />
+            <span ng-show="myForm.email.$error.required && myForm.email.$touched">Email is required.</span>
+            
+            <button type="submit" ng-click="submitForm()">Submit</button>
+        </form>
+
+    <h2>Routing Example:</h2>
+    <div>
+        <a href="#/home">Home</a> | 
+        <a href="#/about">About</a> | 
+        <a href="#/contact">Contact</a>
+        <div ng-view></div>
+    </div>
+</body>
+
+</html> -->
+
+ -->

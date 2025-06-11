@@ -1,0 +1,207 @@
+<!-- <!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angular Js Tutorial</title>
+    <script src="app\lib\angular.min.js"></script>
+</head>
+<body ng-init="ninjas=['Aamir', 'Ali', 'Ahmed', 'Asad']">
+    <ul>
+        <li>{{ninjas[0]}}</li>
+        <li>{{ninjas[1]}}</li>
+        <li>{{ninjas[2]}}</li>
+        <li>{{ninjas[3]}}</li>
+    </ul>
+
+    <ul>
+        <li ng-repeat="ninja in ninjas">{{ninja}}</li>
+    </ul>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="myAngularApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Angular JS Tutorial</title>
+    <link rel="stylesheet" href="content/CSS/styles.css">
+    <link rel="stylesheet" href="content/app/css/header.css">
+    <link rel="stylesheet" href="app/css/footer.css">
+    <script src="app/lib/angular.min.js"></script>
+    <!-- <script src="app\app.js"></script> -->
+    <script src="app/appController.js"></script>
+</head>
+
+<body>
+    <!-- TOPIC: ng-include-->
+    <header ng-include="'header.html'"></header>
+
+
+    <div class="content">
+        <h1>Welcome to the Angular JS Tutorial</h1>
+        <p>This tutorial will help you learn Angular JS from scratch.</p>
+
+        <!-- TOPIC: ng-show & ng-hide -->
+        <div>
+            <h1>Angular JS Directives</h1>
+            <p ng-show="true">This paragraph is shown.</p>
+            <p ng-hide="false">This paragraph is hidden.</p>
+            <p ng-show="false">This paragraph is hidden.</p>
+            <p ng-hide="true">This paragraph is shown.</p>
+
+            <p ng-show="showParagraph">This paragraph is shown when showParagraph is true.</p>
+            <p ng-hide="hideParagraph">This paragraph is hidden when hideParagraph is true.</p>
+            <button ng-click="showParagraph = !showParagraph">Toggle Show Paragraph</button>
+            <button ng-click="hideParagraph = !hideParagraph">Toggle Hide Paragraph</button>
+        </div>
+
+        <!-- <h1>Angular JS Modules</h1> -->
+        <h1>Angular JS Controllers</h1>
+
+        <div ng-controller="MainController">
+            <p>{{message}}</p>
+            <!-- <ul>
+            <li ng-repeat="name in names">{{name}}</li>
+        </ul> -->
+
+            <h1>How to use Filters in Angular JS</h1>
+            <br>
+            <ul>
+                <h3>What is your name and What is your age ?</h3>
+                <li ng-repeat="name in names">{{name.name}} is {{name.age}} years old.</li>
+                <br>
+                <h3>What is your name ?</h3>
+                <li ng-repeat="name in names">Your name is {{name.name}}</li>
+                <br>
+                <h3>What is your age ?</h3>
+                <li ng-repeat="name in names">Your age is {{name.age}}</li>
+                <br>
+                <h3>Names in Ascending Order</h3>
+                <li ng-repeat="name in names | orderBy: 'name'">{{name.name}}</li>
+                <br>
+                <h3>Age in Ascending Order</h3>
+                <li ng-repeat="name in names | orderBy: 'age'">{{name.age}}</li>
+                <br>
+                <h3>Names in Descending Order</h3>
+                <li ng-repeat="name in names | orderBy: '-name'">{{name.name}}</li>
+                <br>
+                <h3>Age in Descending Order</h3>
+                <li ng-repeat="name in names | orderBy: '-age'">{{name.age}}</li>
+            </ul>
+
+            <h1>How to use Multiple variables in Angular JS</h1>
+            <br>
+            <h3>Names in Ascending Order and Age in Descending Order</h3>
+            <ul>
+                <li ng-repeat="name in names | orderBy: ['name', '-age']">
+                    {{name.name}} is {{name.age}} years old.
+                </li>
+                <br>
+                <h3>Names in Descending Order and Age in Ascending Order</h3>
+                <li ng-repeat="name in names | orderBy: ['-name', 'age']">
+                    {{name.name}} is {{name.age}} years old.
+                </li>
+                <br>
+                <h3>Names in Ascending Order and Age in Ascending Order</h3>
+                <li ng-repeat="name in names | orderBy: ['name', 'age']">
+                    {{name.name}} is {{name.age}} years old.
+                </li>
+                <br>
+                <h3>Names in Descending Order and Age in Descending Order</h3>
+                <li ng-repeat="name in names | orderBy: ['-name', '-age']">
+                    {{name.name}} is {{name.age}} years old.
+                </li>
+            </ul>
+
+            <h1>How to use Multiple Filters in Angular JS</h1>
+            <br>
+            <h3>Applying Search Filter</h3>
+            <input type="text" ng-model="search" placeholder="Search by name or age">
+            <ul>
+                <li ng-repeat="name in names | filter: search">
+                    {{name.name}} is {{name.age}} years old.
+                </li>
+            </ul>
+            <br>
+            <h3>Applying Sort Filter</h3>
+            <input type="text" ng-model="sort" placeholder="Sort by name or age">
+            <ul>
+                <li ng-repeat="name in names | orderBy: 'name'">
+                    {{name.name}} is {{name.age}} years old.
+                </li>
+            </ul>
+
+            <h1>By using Multiple filters getting how to get Names along with Belt and Rate ?</h1>
+            <br>
+            <input type="text" ng-model="search" placeholder="Search by name or belt">
+            <ul>
+                <li ng-repeat="name in names | orderBy: 'name' | filter: search">
+                    {{name.name}} you have achieved {{name.belt}} belt along with the ranking at {{name.rate |
+                    currency}} rate
+                </li>
+            </ul>
+
+            <h1>By using Multiple filters getting how to get Names along with Rate ?</h1>
+            <br>
+            <input type="number" ng-model="search" placeholder="Search by rate">
+            <ul>
+                <li ng-repeat="name in names | orderBy: 'name' | filter: search">
+                    {{name.name}} your having a rate of : {{name.rate | currency: 'USD $ '}}
+                </li>
+            </ul>
+
+            <h1>How to use ng-show and ng-hide ?</h1>
+            <br>
+            <input type="text" ng-model= "search" name="" id="" placeholder="Search by name">
+            <br>
+            <br>
+
+            <h3>Show Available Names</h3>
+            <ul>
+                <li ng-repeat="name in names | orderBy: 'name' | filter: search" ng-show="name.available">
+                    {{name.name}} - {{name.rate | currency}}
+                </li>
+            </ul>
+
+            <h3>Show Unavailable Names</h3>
+            <ul>
+                <li ng-repeat="name in names | orderBy: 'name' | filter: search" ng-show="!name.available">
+                    {{name.name}} - {{name.rate | currency}}
+                </li>
+            </ul>
+
+            <h3>Hide Available Names</h3>
+            <ul>
+                <li ng-repeat="name in names | orderBy: 'name' | filter: search" ng-hide="name.available">
+                    {{name.name}} - {{name.rate | currency}}
+                </li>
+            </ul>
+
+            <h3>Hide Unavailable Names</h3>
+            <ul>
+                <li ng-repeat="name in names | orderBy: 'name' | filter: search" ng-hide="!name.available">
+                    {{name.name}} - {{name.rate | currency}}
+                </li>
+            </ul>
+
+            <h1>How to use ng-click directive ?</h1>
+            <br>
+            <button ng-click="order = 'name'">Order by Name</button>
+            <button ng-click="order = 'belt'">Order by Belt</button>
+            <br>
+            <input type="text" ng-model="search" placeholder="Search for a Ninja">
+            <br>
+            <ul>
+                <li ng-repeat="name in names | orderBy: order | filter: search" ng-show="name.available">
+                    <h3>{{name.name}} - {{name.rate | currency: 'USD $ '}}</h3>
+                    <span>{{name.belt}} belt</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
