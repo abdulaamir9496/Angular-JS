@@ -1,0 +1,78 @@
+<!-- Mini Practice Tasks:
+
+🔤 Build a name reverser using ng-model, ng-click, and a function.
+
+📃 Display a list of items with ng-repeat, and apply uppercase filter.
+
+➕ Add a calculator with two input fields and buttons using ng-click.
+
+🧩 Use ng-show to toggle visibility of a message.
+
+📂 Use ng-include to load footer.html from an external file. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Angular JS</title>
+    <link rel="stylesheet" href="content/CSS/styles.css">
+    <script src="app/lib/angular.min.js"></script>
+    <script src="app/practiceController.js"></script>
+</head>
+
+<body ng-app="myPracticeApp" ng-controller="MyController">
+    <header ng-include="'header.html'"></header>
+
+    <div class="content">
+        <h1>Practice Angular JS</h1>
+
+        <div>
+            <h2>Reverse Name</h2>
+
+            <input type="text" ng-model="nameInput" placeholder="Enter your name">
+            <button ng-click="reverseName()">Reverse</button>
+            <p>Reversed Name: {{reversedName}}</p>
+
+            <h2>Uppercase List</h2>
+            <ul>
+                <li ng-repeat="item in items">{{item | uppercase}}</li>
+            </ul>
+        </div>
+
+        <div>
+            <h2>Simple Calculator</h2>
+            <input type="text" ng-model="num1" placeholder="Enter first number">
+            <input type="text" ng-model="num2" placeholder="Enter second number">
+
+            <button ng-click="addNumbers()">Add</button>
+            <p>Result: {{result}}</p>
+
+            <button ng-click="subtractNumbers()">Subtract</button>
+            <p>Result: {{result}}</p>
+
+            <button ng-click="multiplyNumbers()">Multiply</button>
+            <p>Result: {{result}}</p>
+
+            <button ng-click="divideNumbers()">Divide</button>
+            <p>Result: {{result}}</p>
+        </div>
+
+        <div>
+            <h2>Toggle Message</h2>
+            <button ng-click="toggleMessage()">Toggle Message</button>
+            <p ng-show="showMessage">This is a message: {{message}}</p>
+            <p ng-hide="hideMessage">This message is hidden when hideMessage is true.</p>
+            <button ng-click="showMessage = !showMessage">Toggle Show Message</button>
+            <button ng-click="hideMessage = !hideMessage">Toggle Hide Message</button>
+        </div>
+
+        <div>
+            <h2>Footer</h2>
+            <footer ng-include="'footer.html'"></footer>
+        </div>
+    </div>
+</body>
+
+</html>
