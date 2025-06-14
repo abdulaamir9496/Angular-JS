@@ -1,10 +1,13 @@
-var myAngularApp = angular.module('myAngularApp', ['ngRoute', 'ui.router']);
+var myAngularApp = angular.module('myAngularApp', ['ngRoute', 'ngAnimate']);
 
-myAngularApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+myAngularApp.config(['$routeProvider', '$locationProvider', function ($routeProvider) {
     $routeProvider
         .when('/home', {
             templateUrl: 'views/home.html',
             controller: 'MainController'
+        })
+        .when('/contact', {
+            templateUrl: 'views/contact.html',
         })
         .when('/directory', {
             templateUrl: 'views/directory.html',
@@ -22,7 +25,9 @@ myAngularApp.directive('randomName', [function() {
             names: '=', // Bind to the names array from the parent scope
             title: '=', // Bind to the title attribute from the parent scope
         },
-        template: '<img src="{{names[0].thumb}} />',
+        templateUrl: 'views/random.html'
+        transclude: true, // Allow transclusion of content inside the directive
+        replace: true, // Replace the directive element with the template
         controller: function($scope) {
             // Generate a random name from the names array
             $scope.randomName = function() {
@@ -58,7 +63,11 @@ myAngularApp.controller('MainController', ['$scope','$http',  function ($scope, 
         $scope.newname.age = '';
         $scope.newname.belt = '';
         $scope.newname.rate = '';
-    }
+    };
+
+    $scope.removeAll = function () {
+        $scope.names = [];
+    };
 
     //We don't need to use, when we are using http request to fetch data from server
     // $scope.names = [
@@ -135,4 +144,3 @@ myAngularApp.controller('MainController', ['$scope','$http',  function ($scope, 
 //         }
 //     ]
 // }]);
-

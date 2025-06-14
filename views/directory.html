@@ -2,10 +2,10 @@
     <button ng-click="order = name">Order by Name</button>
     <button ng-click="order = belt">Order by Belt</button>
     <input type="text ng-model=" search" placeholder="Search Ninjas">
-    <ul>
+    <ul id="name-list">
         <li ng-repeat="name in names | filter:search | orderBy:order" ng-show="name.available">
-            <img ng-src="{{name.thumb}}" alt="" style="margin: -12px 10px 0 0; float: left; width: 50px;"
-                ng-show="name">
+            <img ng-src="{{name.thumbnail}}" alt="" style="margin: -12px 10px 0 0; float: left; width: 50px;"
+                ng-show="name.thumbnail">
             <h3>{{name.name}} - {{name.rate | currency: 'USD $ '}}</h3>
             <div class="remove" ng-click="removeNinja(name)">X</div>
             <span class="belt" style="background: {{name.belt}}">{{name.belt}} belt</span>
@@ -20,4 +20,6 @@
         <input type="submit" value="Add a new ninja" name="" id="">
         <!-- <button type="submit" ng-click="addName()">Add Names</button> -->
     </form>
+
+    <a href="" ng-click="removeAll()">Remove all names</a>
 </div>
