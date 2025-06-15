@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myAngularApp">
 <head>
+    <base href="/" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Directives of Angular JS</title>
     <link rel="stylesheet" href="content/CSS/styles.css">
     <script src="app/lib/angular.min.js"></script>
-    <script src="app/lib/angular-animate.min.js"></script>
     <script src="app/lib/angular-route.min.js"></script>
-    <script src="app/app.js"></script>
-    <script src="app/MainController.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular-route.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.29/angular-ui-router.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular-route.min.js"></script>
+    <script src="app/lib/angular-animate.min.js"></script>
+    <script src="app/appController.js"></script>
 </head>
-<body>
+<body ng-app="myAngularApp">
     <header ng-include="'header.html'"></header>
     <main ng-view></main>
+    <!-- <main ng-view ng-controller="MainController"></main> -->
 </body>
 </html>

@@ -9,6 +9,16 @@ h3 {
     margin: 0;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.content {
+    word-wrap: break-word;
+}
+
+
 .belt {
     padding: 5px 10px;
     border-radius: 10px;
@@ -161,4 +171,13 @@ main.ng-enter.ng-enter-active {
 
 input.ng-invalid.ng-touched,textarea.ng-invalid.ng-touched {
     border: 2px solid crimson;
+}
+
+input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
+    border: 2px solid red;
+}
+
+input[disabled="disabled"] {
+    opacity: 0.5;
+    cursor: not-allowed !important;
 }

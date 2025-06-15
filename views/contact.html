@@ -1,8 +1,26 @@
 <div class="content">
-    <form name="contactForm" novalidate>
+    <form name="contactForm" ng-submit="sendMessage()" novalidate>
         <input type="text" name="name" placeholder="Your Name" ng-model="contact.name" ng-required="true" />
+        <!-- <span>
+            $pristine: {{contactForm.name.$pristine}}<br />
+            $dirty: {{contactForm.name.$dirty}}<br />
+            $touched: {{contactForm.name.$touched}}<br />
+            $untouched: {{contactForm.name.$untouched}}<br />
+            $valid: {{contactForm.name.$valid}}<br />
+            $invalid: {{contactForm.name.$invalid}}<br />
+        </span> -->
+
+        <div ng-show="contactForm.name.$touched && contactForm.name.$invalid">
+            <small style="color: red; display: block; text-align: center;">Enter a valid name</small>
+        </div>
+
         <input type="email" name="email" placeholder="Your Email" ng-model="contact.email" ng-required="true" />
+
+        <div ng-show="contactForm.email.$touched && contactForm.email.$invalid">
+            <small style="color: red; display: block; text-align: center;">Enter a valid email</small>
+        </div>
+
         <textarea name="message" placeholder="Your Message" ng-model="contact.message" ng-required="true"></textarea>
-        <input type="submit" value="Send Message" />
+        <input type="submit" value="Send Message" ng-disabled="contactForm.$invalid"/>
     </form>
 </div>

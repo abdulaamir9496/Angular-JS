@@ -4,68 +4,68 @@
     "belt": "black",
     "rate": 1000,
     "available": true,
-    "thumbnail": "https://example.com/john_doe.jpg"
+    "thumbnail": "../image/employee1.jpg"
 }, {
     "name": "Jane Smith",
     "age": 25,
     "belt": "brown",
     "rate": 800,
     "available": false,
-    "thumbnail": "https://example.com/jane_smith.jpg"
+    "thumbnail": "../image/employee2.jpg"
 }, {
     "name": "Alice Johnson",
     "age": 28,
     "belt": "blue",
     "rate": 600,
     "available": true,
-    "thumbnail": "https://example.com/alice_johnson.jpg"
+    "thumbnail": "../image/employee3.jpg"
 }, {
     "name": "Bob Brown",
     "age": 35,
     "belt": "red",
     "rate": 1200,
     "available": true,
-    "thumbnail": "https://example.com/bob_brown.jpg"
+    "thumbnail": "../image/employee4.jpg"
 }, {
     "name": "Charlie White",
     "age": 22,
     "belt": "green",
     "rate": 500,
     "available": false,
-    "thumbnail": "https://example.com/charlie_white.jpg"
+    "thumbnail": "../image/employee5.jpg"
 }, {
     "name": "David Green",
     "age": 29,
     "belt": "yellow",
     "rate": 900,
     "available": true,
-    "thumbnail": "https://example.com/david_green.jpg"
+    "thumbnail": "../image/employee6.jpg"
 }, {
     "name": "Eve Black",
     "age": 32,
     "belt": "purple",
     "rate": 1100,
     "available": true,
-    "thumbnail": "https://example.com/eve_black.jpg"
+    "thumbnail": "../image/employee7.jpg"
 }, {
     "name": "Frank Blue",
     "age": 27,
     "belt": "white",
     "rate": 700,
     "available": false,
-    "thumbnail": "https://example.com/frank_blue.jpg"
+    "thumbnail": "../image/employee8.jpg"
 }, {
     "name": "Grace Red",
     "age": 24,
     "belt": "orange",
     "rate": 650,
     "available": true,
-    "thumbnail": "https://example.com/grace_red.jpg"
+    "thumbnail": "../image/employee9.jpg"
 }, {
     "name": "Hank Yellow",
     "age": 31,
     "belt": "gray",
     "rate": 950,
     "available": true,
-    "thumbnail": "https://example.com/hank_yellow.jpg"
+    "thumbnail": "../image/employee1.jpg"
 }]

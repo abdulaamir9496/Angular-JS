@@ -1,56 +1,92 @@
+// Define the AngularJS app and dependencies
 var myAngularApp = angular.module('myAngularApp', ['ngRoute', 'ngAnimate']);
 
-myAngularApp.config(['$routeProvider', '$locationProvider', function ($routeProvider) {
+// Configure routes
+myAngularApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+
+    $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+    });
+
     $routeProvider
         .when('/home', {
             templateUrl: 'views/home.html',
-            controller: 'MainController'
+            controller: 'HomeController'
         })
         .when('/contact', {
             templateUrl: 'views/contact.html',
+            controller: 'ContactController'
+        })
+        .when('/contact-success', {
+            templateUrl: 'views/contact-success.html',
+            controller: 'ContactController'
         })
         .when('/directory', {
             templateUrl: 'views/directory.html',
-            controller: 'MainController'
+            controller: 'DirectoryController'
         })
         .otherwise({
             redirectTo: '/home'
         });
 }]);
 
-myAngularApp.directive('randomName', [function() {
+// Custom directive: randomName
+myAngularApp.directive('randomName', [function () {
     return {
         restrict: 'E',
         scope: {
-            names: '=', // Bind to the names array from the parent scope
-            title: '=', // Bind to the title attribute from the parent scope
+            names: '=',     // Two-way binding for names array
+            title: '='      // Two-way binding for title
         },
-        templateUrl: 'views/random.html'
-        transclude: true, // Allow transclusion of content inside the directive
-        replace: true, // Replace the directive element with the template
-        controller: function($scope) {
-            // Generate a random name from the names array
-            $scope.randomName = function() {
+        templateUrl: 'views/random.html',
+        transclude: true,
+        replace: true,
+        controller: function ($scope) {
+            $scope.randomName = function () {
                 if ($scope.names && $scope.names.length > 0) {
-                    return $scope.names[Math.floor(Math.random() * $scope.names.length)];
+                    $scope.random = $scope.names[Math.floor(Math.random() * $scope.names.length)];
                 }
                 return 'No names available';
             };
-        },
-        
-        // template: '<h1>Random Name: {{randomName}}</h1>',
-        // link: function(scope, element, attrs) {
-        //     var names = ['John', 'Mary', 'Peter', 'Sally', 'Jane'];
-        //     scope.randomName = names[Math.floor(Math.random() * names.length)];
-        // }
-    }
+        }
+    };
 }]);
 
-myAngularApp.controller('MainController', ['$scope','$http',  function ($scope, $http) {
-    $scope.removeName = function (name) {
-        var removedName = $scope.names.indexOf(name);
-        $scope.names.splice(removedName, 1);
+// Controller for /home
+myAngularApp.controller('HomeController', ['$scope', function ($scope) {
+    $scope.title = "Welcome to the Home Page!";
+}]);
+
+// Controller for /contact
+myAngularApp.controller('ContactController', ['$scope', '$location', function ($scope, $location) {
+    $scope.sendMessage = function () {
+        $location.path('/contact-success');
     };
+    
+    $scope.contact = {
+        name: '',
+        email: '',
+        message: ''
+    };
+}]);
+
+// Controller for /directory
+myAngularApp.controller('DirectoryController', ['$scope', '$http', function ($scope, $http) {
+    console.log("DirectoryController is working");
+
+    // Fetch data from JSON file
+    $http.get('data/names.json')
+        .then(function (response) {
+            $scope.names = response.data;
+        }, function (error) {
+            console.error('Error fetching data:', error);
+        });
+
+    // Default order
+    $scope.order = 'name';
+
+    // Add a new name
     $scope.addName = function () {
         $scope.names.push({
             name: $scope.newname.name,
@@ -59,39 +95,28 @@ myAngularApp.controller('MainController', ['$scope','$http',  function ($scope, 
             rate: parseInt($scope.newname.rate),
             available: true
         });
-        $scope.newname.name = '';
-        $scope.newname.age = '';
-        $scope.newname.belt = '';
-        $scope.newname.rate = '';
+
+        // Clear form fields
+        $scope.newname = {};
     };
 
+    // Remove a specific name
+    $scope.removeName = function (name) {
+        var index = $scope.names.indexOf(name);
+        if (index !== -1) {
+            $scope.names.splice(index, 1);
+        }
+    };
+
+    // Remove all names
     $scope.removeAll = function () {
         $scope.names = [];
     };
-
-    //We don't need to use, when we are using http request to fetch data from server
-    // $scope.names = [
-    //     { name: 'Aamir', age: 28, belt: 'black', rate: 50, available: true },
-    //     { name: 'Khizer', age: 25, belt: 'red', rate: 40, available: false },
-    //     { name: 'Ibrahim', age: 30, belt: 'blue', rate: 60, available: true }
-    // ];
-
-    // Fetching data from server using $http service
-    $http.get('data/names.json').success(function (data){
-        $scope.names = data;
-    });
-
-    // $http.get('data/names.json')
-    //     .then(function (response) {
-    //         $scope.names = response.data;
-    //     }, function (error) {
-    //         console.error('Error fetching data:', error);
-    //     });
-
-    // $scope.order = 'name';
-    // console.log(angular.toJson($scope.names));
 }]);
 
+
+
+// ***********************************************
 // var myAngularController = angular.module('myAngularApp', []);
 
 // myAngularController.controller('MainController', ['$scope', function($scope) {
