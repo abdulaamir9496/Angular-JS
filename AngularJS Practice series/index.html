@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS Efficient Practice</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="MainCtrl">
+    <h1>Welcome to AngularJS!</h1>
+
+    <div>
+        <label>Name:</label>
+        <input type="text" ng-model="user.name" ng-change="nameChanged()" placeholder="Enter your name" required />
+        <p>Hello, {{user.name}}</p>
+    </div>
+
+    <div>
+        <label>Age:</label>
+        <input type="number" ng-model="user.age" placeholder="Enter your age" required />
+    </div>
+
+    <div>
+        <label>Role:</label>
+        <input type="text" ng-model="user.role" placeholder="Enter your role" required />
+    </div>
+
+    <div>
+        <label>City:</label>
+        <input type="text" ng-model="user.city" placeholder="Enter your city" required />
+    </div>
+
+    <div>
+        <label>Hobby:</label>
+        <input type="text" ng-model="user.hobby" placeholder="Enter your hobby" required />
+    </div>
+
+    <div ng-show="isComplete()">
+        <p>{{user.name}} is a {{user.age}} year old {{user.role}} from {{user.city}} who enjoys {{user.hobby}}.</p>
+        <button ng-click="submitForm()">Submit</button>
+    </div>
+
+    <script>
+        angular.module('myApp', [])
+            .controller('MainCtrl', function ($scope) {
+                $scope.user = {};
+
+                $scope.nameChanged = function () {
+                    console.log('Name changed to:', $scope.user.name);
+                };
+
+                $scope.isComplete = function () {
+                    return $scope.user.name && $scope.user.age && $scope.user.role && $scope.user.city && $scope.user.hobby;
+                };
+
+                $scope.submitForm = function () {
+                    alert('Form submitted for ' + $scope.user.name + '!');
+                };
+            });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS App + Controller Challenge</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="MyController">
+
+    <h2>Mini Challenge: Your Favorites</h2>
+
+    <form action="" name="favForm" ng-submit="submit()">
+        <div>
+            <label for="">Favorite Food: </label>
+            <input type="text" ng-model="user.food" placeholder="e.g. Biryani" required minlength="3" />
+        </div>
+        <br>
+        <div>
+            <label for="">Favorite Color: </label>
+            <input type="text" ng-model="user.color" placeholder="e.g. Olive" required minlength="3" />
+        </div>
+        <br>
+        <div>
+            <label for="">Favorite Movie: </label>
+            <input type="text" ng-model="user.movie" placeholder="e.g. The Dark Knight" required minlength="3" />
+        </div>
+        <br>
+
+        <p ng-show="user.food && user.color && user.movie">Aamir loves {{user.food}}, enjoys {{user.color}} and watches
+            {{user.movie}}.</p>
+
+        <button ng-click="user = {}">Reset</button>
+
+        <button type="submit" ng-disabled="!favForm.$valid">Submit</button>
+    </form>
+
+    <p ng-if="successMsg" style="color: green; font-weight: bold;">{{ successMsg }}</p>
+
+    <script>
+        //create the AngularJS app
+        var app = angular.module('myApp', []);
+
+        //Define the controller
+        app.controller('MyController', ['$scope', function ($scope) {
+            // Initialize an empty object to hold inputs
+            $scope.user = {
+                // food: 'Biryani',
+                // color: 'Olive',
+                // movie: 'The Dark Knight'
+            };
+
+            // Function to handle Submit Functionality
+            $scope.successMsg = "";
+            $scope.submit = function () {
+                if ($scope.user.food && $scope.user.color && $scope.user.movie) {
+                    $scope.successMsg = `Aamir loves ${$scope.user.food}, enjoys ${$scope.user.color} and watches ${$scope.user.movie}.`;
+                    alert($scope.successMsg);
+                } else {
+                    $scope.successMsg = "";
+                    alert("Please fill out all fields correctly.");
+                }
+            }
+        }]);
+    </script>
+</body>
+
+</html>
