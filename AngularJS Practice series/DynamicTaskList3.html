@@ -1,0 +1,54 @@
+<!--✅ Challenge: Build a Dynamic Task List 📝
+🎯 Requirements:
+Create an input to enter a task.
+Add a button to "Add Task".
+Show the task list using ng-repeat.
+Add a "Remove" button next to each task.
+Optional: Show a "Total Tasks: N" count below. -->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build a Dynamic Task List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="TaskController">
+    <div>
+        <label for="">Enter a Task: </label>
+        <input type="text" ng-model="newTask" placeholder="Enter a task">
+        <button ng-click="addTask()" ng-disabled="!newTask">Add Task</button>
+
+        <ul>
+            <li ng-repeat="task in tasks">
+                {{index + 1}}. {{ task }}
+                <button ng-click="removeTask($index)">❌ Remove</button>
+            </li>
+        </ul>
+
+        <p>Total Tasks: {{ tasks.length }}</p>
+
+    </div>
+
+    <script>
+        var app = angular.module('$scope', function ($scope) {
+            this.tasks = [];
+            this.task = '';
+
+            this.addTask = function () {
+                if ($scope.newTask.trim() !== '') {
+                    $scope.tasks.push($scope.newTask.trim());
+                    $scope.newTask = '';
+                }
+            }
+            this.removeTask = function (index) {
+                this.tasks.splice(index, 1);
+            }
+        });
+    </script>
+</body>
+
+</html>

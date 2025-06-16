@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="profileCardApp">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Build a Profile Card</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="ProfileCardController">
+
+    <h2>Profile Card Form</h2>
+
+    <form name="profileForm" novalidate ng-submit="submit(profileForm)">
+        <label>Full Name:</label>
+        <input type="text" ng-model="profile.name" name="name" minlength="3" placeholder="Enter your full name"
+            required>
+        <br><br>
+
+        <label>Email:</label>
+        <input type="email" ng-model="profile.email" name="email" placeholder="Enter your email" required>
+        <br><br>
+
+        <label>Job Title:</label>
+        <input type="text" ng-model="profile.job" name="jobTitle" placeholder="Enter your job title" required>
+        <br><br>
+
+        <label>Country:</label>
+        <input type="text" ng-model="profile.country" name="country" placeholder="Enter your country" required>
+        <br><br>
+
+        <label>Favorite Tech Stack:</label>
+        <input type="text" ng-model="profile.stack" name="techStack" placeholder="Enter your favorite tech stack"
+            required>
+        <br><br>
+
+        <button type="button" ng-click="reset(profileForm)" ng-disabled="!profileForm.$dirty">Reset</button>
+        <button type="submit" ng-disabled="!profileForm.$valid">Submit</button>
+    </form>
+
+    <hr>
+
+    <div ng-if="submitted" class="profile-card" style="border: 1px solid #ccc; padding: 10px; margin-top: 20px;">
+        <h3>Profile Card</h3>
+        <p><strong>Name:</strong> {{ profile.name }}</p>
+        <p><strong>Email:</strong> {{ profile.email }}</p>
+        <p><strong>Job Title:</strong> {{ profile.job }}</p>
+        <p><strong>Country:</strong> {{ profile.country }}</p>
+        <p><strong>Favorite Tech Stack:</strong> {{ profile.stack }}</p>
+    </div>
+
+    <script>
+        var app = angular.module('profileCardApp', []);
+
+        app.controller('ProfileCardController', ['$scope', function ($scope) {
+            $scope.profile = {};
+            $scope.submitted = false;
+
+            $scope.submit = function (form) {
+                if (form.$valid) {
+                    $scope.submitted = true;
+
+                    alert(
+                        `Profile Submitted Successfully!\n` +
+                        `Name: ${$scope.profile.name}\n` +
+                        `Email: ${$scope.profile.email}\n` +
+                        `Job Title: ${$scope.profile.job}\n` +
+                        `Country: ${$scope.profile.country}\n` +
+                        `Tech Stack: ${$scope.profile.stack}`
+                    );
+                } else {
+                    alert('Please fill out all fields before submitting.');
+                }
+            };
+
+            $scope.reset = function (form) {
+                $scope.profile = {};
+                $scope.submitted = false;
+                form.$setPristine();
+                form.$setUntouched();
+            };
+        }]);
+    </script>
+
+</body>
+
+</html>
